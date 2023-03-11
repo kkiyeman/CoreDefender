@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -75,6 +76,6 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         //animator.MoveDir = 0;
-        //movement.MoveTo(new Vector3(x, 0, z));
+        movement.MoveTo(new Vector3(transform.position.x, 0, transform.position.z));
     }
 }

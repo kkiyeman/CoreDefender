@@ -11,6 +11,9 @@ public class MovementCharacterController : MonoBehaviour
     [SerializeField] private float moveDir;   //이동방향
     private Vector3 moveForce;                //이동 힘 (x, z와 y축을 별도로 계산해 실제 이동에 적용)
 
+    Rigidbody rb;
+    float power = 20f;
+
     [SerializeField] private float jumpForce; //점프 힘
     [SerializeField] private float gravity;   //중력 계수
 
@@ -38,12 +41,13 @@ public class MovementCharacterController : MonoBehaviour
         get => moveDir;
     }
 
-    private CharacterController characterController;  //플레이어 이동 제어를 위한 컴포넌트
+    private CharacterController charCon;  //플레이어 이동 제어를 위한 컴포넌트
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        charCon = GetComponent<CharacterController>();
         curDir = GetComponent<PlayerController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -57,7 +61,7 @@ public class MovementCharacterController : MonoBehaviour
         };
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // 1초당 moveForce 속력으로 이동
         //characterController.Move(moveForce * Time.deltaTime);
@@ -78,26 +82,30 @@ public class MovementCharacterController : MonoBehaviour
 
     public void MoveFront()
     {
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        //charCon.Move(transform.forward * moveSpeed * Time.deltaTime);
         //Debug.Log("앞");
+        rb.AddForce(Vector3.forward * power * Time.deltaTime);
         curDir.Dir = 1;
     }
     public void MoveBack()
     {
-        transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
+        // charCon.Move(transform.forward * -1f * moveSpeed * Time.deltaTime);
         //Debug.Log("뒤");
+        rb.AddForce(Vector3.back * power * Time.deltaTime);
         curDir.Dir = 2;
     }
     public void MoveRight()
     {
-        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        //charCon.Move(transform.right * moveSpeed * Time.deltaTime);
         //Debug.Log("우");
+        rb.AddForce(Vector3.right * power * Time.deltaTime);
         curDir.Dir = 3;
     }
     public void MoveLeft()
     {
-        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        //charCon.Move(transform.right * -1f * moveSpeed * Time.deltaTime);
         //Debug.Log("좌");
+        rb.AddForce(Vector3.left * power * Time.deltaTime);
         curDir.Dir = 4;
     }
 
@@ -113,7 +121,7 @@ public class MovementCharacterController : MonoBehaviour
     public void Jump()
     {
         //플레이어가 바닥에 있을 때만 점프 가능
-        if (characterController.isGrounded)
+        if (charCon.isGrounded)
         {
             moveForce.y = jumpForce;
         }
