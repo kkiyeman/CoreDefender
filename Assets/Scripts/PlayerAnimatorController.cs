@@ -24,6 +24,11 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetTrigger("onReload");
     }
 
+    public void OnShoot()
+    {
+        animator.SetTrigger("Shoot");
+    }
+
     public void Play(string stateName, int layer, float normalizedTime)
     {
         animator.Play(stateName, layer, normalizedTime);

@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimatorController animator;         //애니메이션 재생 제어
     private MovementCharacterController movement;      //키보드 입력으로 플레이어 이동, 점프
 
+    private WeaponAssaultRifle weapon;                 //무기를 이용한 공격 제어
+
     public int Dir
     {
         get => dir; set => dir = value;
@@ -25,13 +27,14 @@ public class PlayerController : MonoBehaviour
         rotateToMouse = GetComponent<RotateToMouse>();
         movement = GetComponent<MovementCharacterController>();
         animator = GetComponent<PlayerAnimatorController>();
+        weapon = GetComponentInChildren<WeaponAssaultRifle>();
     }
 
     private void Update()
     {
         UpdateRotate();
         UpdateMove();
-        Debug.Log(dir);
+        UpdateWeaponAction();
     }
 
     private void UpdateRotate()
@@ -77,5 +80,22 @@ public class PlayerController : MonoBehaviour
         }
         //animator.MoveDir = 0;
         movement.MoveTo(new Vector3(transform.position.x, 0, transform.position.z));
+    }
+
+    private void UpdateWeaponAction()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            weapon.StartWeaponAction();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            weapon.StopWeaponAction();
+        }
+
+        if (Input.GetKeyDown(keyCodeReload))
+        {
+            weapon.StartReload();
+        }
     }
 }
