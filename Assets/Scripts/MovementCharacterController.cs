@@ -63,6 +63,8 @@ public class MovementCharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        bool isAnyKey = false;
+
         // 1초당 moveForce 속력으로 이동
         //characterController.Move(moveForce * Time.deltaTime);
         if (Input.anyKey)
@@ -71,11 +73,13 @@ public class MovementCharacterController : MonoBehaviour
             {
                 if (Input.GetKey(dic.Key))
                 {
+                    isAnyKey = true;
                     dic.Value();
                 }
             }
         }
-        else
+        
+        if(!isAnyKey)
             curDir.Dir = 0;
 
     }

@@ -24,6 +24,7 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetTrigger("onReload");
     }
 
+
     public void OnShoot()
     {
         animator.SetTrigger("Shoot");

@@ -136,7 +136,9 @@ public class WeaponAssaultRifle : MonoBehaviour
             weaponSetting.currentAmmo--;
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
 
-            animator.OnShoot();
+            string animation = "ingleShot_ARShot_AR";
+            animator.Play(animation, -1, 0);
+            //animator.OnShoot();
             //총구 이펙트 재생
             //StartCoroutine("OnMuzzleFlashEffect");
             //공격 사운드 재생
