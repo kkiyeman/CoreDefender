@@ -47,7 +47,7 @@ public class MovementCharacterController : MonoBehaviour
     {
         charCon = GetComponent<CharacterController>();
         curDir = GetComponent<PlayerController>();
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -86,30 +86,34 @@ public class MovementCharacterController : MonoBehaviour
 
     public void MoveFront()
     {
-        //charCon.Move(transform.forward * moveSpeed * Time.deltaTime);
+        charCon.Move(transform.forward * moveSpeed * Time.deltaTime);
+        //charCon.SimpleMove(transform.forward * moveSpeed * Time.deltaTime);
         //Debug.Log("╬у");
-        rb.AddForce(Vector3.forward * power * Time.deltaTime);
+        //rb.AddForce(Vector3.forward * power * Time.deltaTime);
         curDir.Dir = 1;
     }
     public void MoveBack()
     {
-        // charCon.Move(transform.forward * -1f * moveSpeed * Time.deltaTime);
+        charCon.Move(transform.forward * -1f * moveSpeed * Time.deltaTime);
+        //charCon.SimpleMove(transform.forward * -1f * moveSpeed * Time.deltaTime);
         //Debug.Log("╣з");
-        rb.AddForce(Vector3.back * power * Time.deltaTime);
+        //rb.AddForce(Vector3.back * power * Time.deltaTime);
         curDir.Dir = 2;
     }
     public void MoveRight()
     {
-        //charCon.Move(transform.right * moveSpeed * Time.deltaTime);
+        charCon.Move(transform.right * moveSpeed * Time.deltaTime);
+        //charCon.SimpleMove(transform.right * moveSpeed * Time.deltaTime);
         //Debug.Log("©Л");
-        rb.AddForce(Vector3.right * power * Time.deltaTime);
+        //rb.AddForce(Vector3.right * power * Time.deltaTime);
         curDir.Dir = 3;
     }
     public void MoveLeft()
     {
-        //charCon.Move(transform.right * -1f * moveSpeed * Time.deltaTime);
+        charCon.Move(transform.right * -1f * moveSpeed * Time.deltaTime);
+        //charCon.SimpleMove(transform.right * -1f * moveSpeed * Time.deltaTime);
         //Debug.Log("аб");
-        rb.AddForce(Vector3.left * power * Time.deltaTime);
+        //rb.AddForce(Vector3.left * power * Time.deltaTime);
         curDir.Dir = 4;
     }
 

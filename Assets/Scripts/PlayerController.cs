@@ -40,9 +40,9 @@ public class PlayerController : MonoBehaviour
     private void UpdateRotate()
     {
         float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        //float mouseY = Input.GetAxis("Mouse Y");
 
-        rotateToMouse.UpdateRotate(mouseX, mouseY);
+        rotateToMouse.UpdateRotate(mouseX);//mouseY
     }
 
     private void UpdateMove()
@@ -51,32 +51,29 @@ public class PlayerController : MonoBehaviour
         {
             case 0:
                 animator.MoveDir = 0.0f;
-                Debug.Log("정지");
+                //Debug.Log("정지");
                 break;
 
             case 1:
                 animator.MoveDir = 0.25f;
-                Debug.Log("앞");
+               //Debug.Log("앞");
                 break;
 
             case 2:
                 animator.MoveDir = 0.5f;
-                Debug.Log("뒤");
+                //Debug.Log("뒤");
                 break;
 
             case 3:
                 animator.MoveDir = 0.75f;
-                Debug.Log("우");
+                //Debug.Log("우");
                 break;
 
             case 4:
                 animator.MoveDir = 1.0f;
-                Debug.Log("좌");
+                //Debug.Log("좌");
                 break;
 
-            default:
-                animator.MoveDir = 0.0f;
-                break;
         }
         //animator.MoveDir = 0;
         movement.MoveTo(new Vector3(transform.position.x, 0, transform.position.z));
