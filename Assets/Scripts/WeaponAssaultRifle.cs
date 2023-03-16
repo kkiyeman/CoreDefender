@@ -57,6 +57,9 @@ public class WeaponAssaultRifle : MonoBehaviour
 
     private void OnEnable()
     {
+        //총구 이펙트 오브젝트 비활성화
+        muzzleFlashEffect.SetActive(false);
+
         //무기가 활성화될 때 해당 무기의 탄창 정보를 갱신한다.
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         //무기가 활성화될 때 해당 무기의 탄 수 정보를 갱신한다.
@@ -138,9 +141,8 @@ public class WeaponAssaultRifle : MonoBehaviour
 
             string animation = "ingleShot_ARShot_AR";
             animator.Play(animation, -1, 0);
-            //animator.OnShoot();
             //총구 이펙트 재생
-            //StartCoroutine("OnMuzzleFlashEffect");
+            StartCoroutine("OnMuzzleFlashEffect");
             //공격 사운드 재생
             //PlaySound(audioClipFire);
             //탄피 생성
@@ -149,6 +151,15 @@ public class WeaponAssaultRifle : MonoBehaviour
             //광선을 발사해 원하는 위치 공격 (+Impact Effect)
             TwoStepRaycast();
         }
+    }
+
+    private IEnumerator OnMuzzleFlashEffect()
+    {
+        muzzleFlashEffect.SetActive(true);
+
+        yield return new WaitForSeconds(weaponSetting.attackRate * 0.3f);
+
+        muzzleFlashEffect.SetActive(false);
     }
 
     private IEnumerator OnReload()
